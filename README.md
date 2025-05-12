@@ -84,7 +84,7 @@ http://localhost:6692/api/v1/healthz
 ```
 ## Next Steps
 ### 1 Connect the Frontend-Application
-- **Follow this [Guide](https://google.de) to host the frontend**
+- **Follow this [Guide]([https://google.de](https://github.com/njoyporn/njoy-frontend)) to host the frontend**
 ### 2 Preparation for Production
 - **DNS:**
     - Domain: yourdomain.com
