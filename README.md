@@ -1,5 +1,5 @@
 # nJoy
-**With nJoy its all about enJoying the movies and or series you watch.**
+**With nJoy its all about enjoying the movies and or series you watch.**
 ## Disclaimer
 **Running this application is not easy at the moment - Its open source so GFIY**
 ## Running the application (from Source /w Docker & Docker-Compse)

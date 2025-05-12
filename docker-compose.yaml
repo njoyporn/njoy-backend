@@ -1,0 +1,29 @@
+services:
+  njoy-backend:
+    env_file: ".env"
+    image: njoy-backend
+    container_name: ${CONTAINER_NAME}
+    restart: always
+    volumes: 
+      - /${VOLUME}/njoy-backend/config:/njoy-backend/config
+      - /${VOLUME}/njoy-backend/keys:/njoy-backend/backend_shared/security/.keys
+      - /${VOLUME}/njoy-backend/logs:/njoy-backend/logs
+      - /${VOLUME}/njoy-backend/data/downloads:/njoy-backend/data/downloads
+      - /${DATA_VOLUME}/njoy-backend/data/thumbnails:/njoy-backend/data/thumbnails
+      - /${DATA_VOLUME}/njoy-backend/data/videos:/njoy-backend/data/videos
+    ports:
+      - ${API_PORT}:${API_PORT}
+    depends_on:
+      - db
+
+  db:
+    env_file: ".env"
+    image: mariadb:10.2
+    restart: always
+    volumes:
+      - /${VOLUME}/njoy-backend/database:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_HOST: ${MYSQL_ROOT_HOST}
+    ports:
+      - ${DB_PORT}:3306

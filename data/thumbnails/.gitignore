@@ -1,0 +1,4 @@
+*.*
+!.gitignore
+!limit-reached/*.*
+!image-not-found/*.*
