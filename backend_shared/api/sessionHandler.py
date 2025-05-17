@@ -1,11 +1,14 @@
 import time, datetime, threading, hashlib, random
 from backend_shared.utils import random
+from backend_shared.logger import logger
 
 class SessionHandler:
     def __init__(self, config):
         self.config = config
         self.session_list = []
         self.random = random.Random()
+        self.logger = logger.Logger()
+        self.randomSessionHandlerID = self.random.CreateRandomId()
 
     def cron_job(self):
         while True:
@@ -54,7 +57,7 @@ class SessionHandler:
         session = self.Session(self.get_user_hash(request), self.config["roles"]["guest"], self.random.CreateRandomId())
         session.lifetime = lifetime
         self.session_list.append(session)
-        print(f"\nCreating Session >> id: {session.session_id}\n                    address: {request.headers['X-Forwarded-For']}\n                    user-agent: {request.headers['User-Agent']}\n")
+        self.logger.log("INFO", f"\nCreating Guest-Session >> id: {session.session_id} | address: {request.headers['X-Forwarded-For']} | user-agent: {request.headers['User-Agent']} | len(session_list) = {len(self.session_list)} | RSHID: {self.randomSessionHandlerID}")
         return session
 
     def create_admin_session(self, request, lifetime="immortail"):
@@ -62,10 +65,12 @@ class SessionHandler:
         if session: 
             session.role = self.config["roles"]["administrator"]
             session.lifetime = lifetime
+            self.logger.log("INFO" f"Upgrade Sessiion >> id: {session.session_id} to role: {self.config['roles']['administrator']}")
         else: 
             session = self.Session(self.get_user_hash(request), self.config["roles"]["administrator"])
             session.lifetime = lifetime
             self.session_list.append(session)
+            self.logger.log("INFO", f"\nCreating Administrator-Session >> id: {session.session_id} | address: {request.headers['X-Forwarded-For']} | user-agent: {request.headers['User-Agent']}\n")
         return session
 
     def create_moderator_session(self, request, lifetime="immortail"):

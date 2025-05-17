@@ -1,11 +1,12 @@
 import json as JSON
 
 class BusinessResponse:
-    def __init__(self, id, message, items, error=None):
+    def __init__(self, id, message, items, error=None, token=None):
         self.id = id
         self.message = message
         self.items = items
         self.error = error
+        self.token = token
 
     def toJson(self):
         return JSON.dumps(self, default=lambda c: c.__dict__, sort_keys=True, indent=4)

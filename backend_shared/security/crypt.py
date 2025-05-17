@@ -14,6 +14,10 @@ class Encrpyter:
         self.fernet = Fernet
         self.logger = logger.Logger()
 
+    def load_binary_private_key(self):
+        with open(f"{os.getcwd()}/{self.private_key_path}", "rb") as private_file:
+            return private_file.read()
+
     def load_private_key(self):
         if os.path.isfile(f"{os.getcwd()}/{self.private_key_path}"):
             with open(f"{os.getcwd()}/{self.private_key_path}", "r") as private_file:
@@ -24,6 +28,10 @@ class Encrpyter:
         time.sleep(300)
         exit()
 
+    def load_binary_public_key(self):
+        with open(f"{os.getcwd()}/{self.public_key_path}", "rb") as public_file:
+            return public_file.read()
+        
     def load_public_key(self):
         if os.path.isfile(f"{os.getcwd()}/{self.public_key_path}"):
             with open(f"{os.getcwd()}/{self.public_key_path}", "r") as public_file:

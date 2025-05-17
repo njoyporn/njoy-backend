@@ -63,7 +63,10 @@ class DBUtils:
                 "views": entry[13],
                 "thumbnail_url": entry[23],
                 "timestamps": self.to_timestamps(entry[26]),
-                "action_stamps": self.to_action_stamps(entry[27])
+                "action_stamps": self.to_action_stamps(entry[27]),
+                "public":entry[16],
+                "free":entry[17],
+                "trailer":entry[18]
             }
             return video_json
         except Exception as e:

@@ -8,7 +8,7 @@ class Verifier:
 
     def get_verifier(self, username: str, password: str, salt: str):
         g = int(7)
-        N = int("F59042A301E668D41BBEB92BF8BABBA35BD882C305890775558EB8EBB13F985E", 16)
+        N = int("4B29068D8F5BBABF985B7B835E2E988D72A301589BB130C30ABF51E64558EBBE", 16)
         h1 = bytes.fromhex(hashlib.sha1(((username + ":" + password)).encode()).hexdigest())
         h2 = int(bytes.fromhex(hashlib.sha1(bytes.fromhex(salt) + h1).hexdigest())[::-1].hex(), 16)
         verifier = bytes.fromhex(format(pow(g, h2, N), "X").ljust(64, "0"))[::-1].hex()
@@ -21,7 +21,7 @@ class Verifier:
     
     def verify_SRP6(self, username: str, password: str, salt: str, verifier: str):
         g = int(7)
-        N = int("F59042A301E668D41BBEB92BF8BABBA35BD882C305890775558EB8EBB13F985E", 16)
+        N = int("4B29068D8F5BBABF985B7B835E2E988D72A301589BB130C30ABF51E64558EBBE", 16)
         x = int(bytes.fromhex(hashlib.sha1(bytes.fromhex(salt) + bytes.fromhex(hashlib.sha1(((username + ":" + password)).encode()).hexdigest())).hexdigest())[::-1].hex(), 16)
         verifier = bytes.fromhex(format(pow(g, x, N), "X").ljust(64, "0"))[::-1].hex()
         return verifier
@@ -85,6 +85,18 @@ class Verifier:
             chunk = data.read(1024)
             hSha.update(chunk)
         return hSha.hexdigest()
+    
+    # def pick_random_char(self):
+    #     return self.chars[random.randint(0, len(self.chars)-1)] 
+
+    # def CreateRandomId(self):
+    #     return hashlib.md5(f"{datetime.datetime.now()}{self.pick_random_char()}".encode()).hexdigest()
+
+    # def _CreateRandomId(self):
+    #     return hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
+
+    # def CreateMD5Hash(self, _input):
+    #     return hashlib.md5(_input.encode()).hexdigest()
 
     def validate_token(self, user_random_id, token):
         rc, result = self.conn.execute(f"select * from tokens where user_random_id = '{user_random_id}' and token = '{token}'")

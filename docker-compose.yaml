@@ -9,8 +9,8 @@ services:
       - /${VOLUME}/njoy-backend/keys:/njoy-backend/backend_shared/security/.keys
       - /${VOLUME}/njoy-backend/logs:/njoy-backend/logs
       - /${VOLUME}/njoy-backend/data/downloads:/njoy-backend/data/downloads
-      - /${DATA_VOLUME}/njoy-backend/data/thumbnails:/njoy-backend/data/thumbnails
-      - /${DATA_VOLUME}/njoy-backend/data/videos:/njoy-backend/data/videos
+      - /${DATA_VOLUME}/nnjoy/app/data/thumbnails:/njoy-backend/data/thumbnails
+      - /${DATA_VOLUME}/nnjoy/app/data/videos:/njoy-backend/data/videos
     ports:
       - ${API_PORT}:${API_PORT}
     depends_on:

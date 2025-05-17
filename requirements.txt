@@ -7,3 +7,4 @@ requests
 opencv-python==4.7.0.68
 numpy==1.26.4
 gunicorn
+pyjwt

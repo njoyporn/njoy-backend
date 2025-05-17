@@ -79,12 +79,12 @@ docker restart njoy-backend
 **API-Health-Check**
 ```bash
 #copy and open address
-http://localhost:6692/api/v1/healthz
+http://localhost:8611/api/v1/healthz
 #should return '200 OK'
 ```
 ## Next Steps
 ### 1 Connect the Frontend-Application
-- **Follow this [Guide]([https://google.de](https://github.com/njoyporn/njoy-frontend)) to host the frontend**
+- **Follow this [Guide](https://google.de) to host the frontend**
 ### 2 Preparation for Production
 - **DNS:**
     - Domain: yourdomain.com
@@ -116,8 +116,8 @@ a2enmod headers
     Header add Access-Control-Allow-Methods "POST, GET, OPTIONS"
     Header add Access-Control-Allow-Headers "Content-Type, X-Requested-With, Origin, Authorization"
 
-    ProxyPass / http://localhost:6692/
-    ProxyPassReverse / http://localhos:6692/
+    ProxyPass / http://localhost:8611/
+    ProxyPassReverse / http://localhos:8611/
 
     SSLEngine on
     ErrorLog ${APACHE_LOG_DIR}/error.log

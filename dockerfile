@@ -9,9 +9,9 @@ ENV TZ="Europe/Berlin"
 WORKDIR /njoy-backend
 
 COPY ["requirements.txt", "./"]
-EXPOSE 6692
+EXPOSE 8611
 
 RUN python3 -m pip install -r requirements.txt
 COPY . .
 
-CMD ["gunicorn", "-b :6692", "-w 4", "run:api", "--log-level debug"]
+CMD ["gunicorn", "-b :8611", "-w 4", "run:api", "--log-level debug", "-t 3600"]
