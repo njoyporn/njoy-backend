@@ -4,9 +4,7 @@
         "port":8611,
         "cors_enabled":true,
         "allowed_domains":["*"],
-        "rsa_enabled":true,
-        "allow_account_creation": true,
-        "allowed_referer": "https://where-your-frontend-comes-from/"
+        "rsa_enabled":true
     },
     "database":{
         "hostname":"192.168.2.121",
@@ -155,7 +153,7 @@
         "admin":{
             "username":"admin",
             "password":"verysecret",
-            "email":"info@njoy.com"
+            "email":"info@njoyporn.de"
         }
     },
     "data":{

@@ -17,6 +17,10 @@ class Executer:
         rc, result = self.connection.execute(f'''select * from {self.config["database"]["name"]}.{self.config["database"]["tables"][0]["name"]} where soft_delete = 0 ORDER BY {col} {dir} LIMIT {limit}''')
         return result
 
+    def get_private_videos(self):
+        rc, result = self.connection.execute(f'''select * from {self.config["database"]["name"]}.{self.config["database"]["tables"][0]["name"]} where public = 0 and soft_delete = 0''')
+        return result
+
     def search_videos(self, searchString, offset=0, limit=15):
         rc, result = self.connection.execute(f'''select * from {self.config["database"]["name"]}.{self.config["database"]["tables"][0]["name"]} where {searchString} and soft_delete = 0 limit {limit + 1} offset {offset}''')
         return result

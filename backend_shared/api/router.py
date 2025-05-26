@@ -1,21 +1,25 @@
 from flask import Flask, request
 from .requestHandler import RequestHandler
 from backend_shared.configurator import Configurator
-import os
+import json as JSON
 
 api = Flask(__name__)
 
 configurator = Configurator()
 configurator.load_config()
 request_handler = RequestHandler(configurator.config)
-request_handler.load_video_id_list()
+request_handler.load_video_list()
 
 base_route = "/api/v1"
-data_path = f"{os.getcwd()}/binarys"
 
 @api.route("/", methods=["GET"])
 def index():
     return "200 OK"
+
+@api.route("/client-ip", methods=["GET"])
+def get_client_ip():
+    return request_handler.handle_get_client_ip(request)
+
 
 @api.route(f"{base_route}/healthz", methods=["GET"])
 def healthz():

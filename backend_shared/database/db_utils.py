@@ -66,7 +66,8 @@ class DBUtils:
                 "action_stamps": self.to_action_stamps(entry[27]),
                 "public":entry[16],
                 "free":entry[17],
-                "trailer":entry[18]
+                "trailer":entry[18],
+                "sponsored_url":entry[24]
             }
             return video_json
         except Exception as e:

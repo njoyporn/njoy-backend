@@ -8,7 +8,7 @@ class Verifier:
 
     def get_verifier(self, username: str, password: str, salt: str):
         g = int(7)
-        N = int("4B29068D8F5BBABF985B7B835E2E988D72A301589BB130C30ABF51E64558EBBE", 16)
+        N = int("8F5BBABBB1305894B29068D51E64558EC30ABF835E2E988D72A301BBEBF985B7", 16)
         h1 = bytes.fromhex(hashlib.sha1(((username + ":" + password)).encode()).hexdigest())
         h2 = int(bytes.fromhex(hashlib.sha1(bytes.fromhex(salt) + h1).hexdigest())[::-1].hex(), 16)
         verifier = bytes.fromhex(format(pow(g, h2, N), "X").ljust(64, "0"))[::-1].hex()
@@ -21,7 +21,7 @@ class Verifier:
     
     def verify_SRP6(self, username: str, password: str, salt: str, verifier: str):
         g = int(7)
-        N = int("4B29068D8F5BBABF985B7B835E2E988D72A301589BB130C30ABF51E64558EBBE", 16)
+        N = int("8F5BBABBB1305894B29068D51E64558EC30ABF835E2E988D72A301BBEBF985B7", 16)
         x = int(bytes.fromhex(hashlib.sha1(bytes.fromhex(salt) + bytes.fromhex(hashlib.sha1(((username + ":" + password)).encode()).hexdigest())).hexdigest())[::-1].hex(), 16)
         verifier = bytes.fromhex(format(pow(g, x, N), "X").ljust(64, "0"))[::-1].hex()
         return verifier
