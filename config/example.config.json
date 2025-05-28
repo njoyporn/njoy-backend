@@ -1,15 +1,19 @@
 {
     "api":{
         "hostname":"0.0.0.0",
-        "port":8611,
+        "port":6692,
         "cors_enabled":true,
         "allowed_domains":["*"],
-        "rsa_enabled":true
+        "rsa_enabled":true,
+        "allow_account_creation": true,
+        "allowed_referer": "*",
+        "allowed_ips": []
     },
     "database":{
-        "hostname":"192.168.2.121",
+        "hostname":"your-host",
         "port":8612,
-        "name":"database",
+        "name":"njoy",
+        "page_size": 15,
         "admin":{
             "username":"root",
             "password":"verysecret"
@@ -20,67 +24,157 @@
         },
         "tables": [
             {
-                "name":"accounts",
+                "name":"videos",
                 "fields":[
                     {
-                        "name":"id",
+                        "name":"uid",
                         "type":"int",
                         "std":"auto_increment primary key"
                     },
                     {
-                        "name":"mid",
-                        "type":"int",
+                        "name":"id",
+                        "type":"varchar(32)",
                         "std":"not null"
                     },
                     {
-                        "name":"username",
-                        "type":"varchar(2048)",
+                        "name":"original_filename",
+                        "type":"varchar(256)",
                         "std":"not null"
                     },
                     {
-                        "name":"nickname",
-                        "type":"varchar(128)",
-                        "std":""
-                    },
-                    {
-                        "name":"verifier",
-                        "type":"binary(32)",
+                        "name":"filename",
+                        "type":"varchar(256)",
                         "std":"not null"
                     },
                     {
-                        "name":"salt",
-                        "type":"binary(32)",
+                        "name":"title",
+                        "type":"varchar(256)",
                         "std":"not null"
                     },
                     {
-                        "name":"email_address",
-                        "type":"varchar(2048)",
-                        "std":"not null"
-                    },
-                    {
-                        "name":"role",
-                        "type":"varchar(64)",
-                        "std":"not null"
-                    },
-                    {
-                        "name":"sub_role",
-                        "type":"varchar(64)",
-                        "std":""
-                    },
-                    {
-                        "name":"member_of",
+                        "name":"description",
                         "type":"varchar(1024)",
                         "std":""
                     },
                     {
-                        "name":"datetime",
+                        "name":"duration",
+                        "type":"int",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"categories",
+                        "type":"varchar(1024)",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"sub_categories",
+                        "type":"varchar(512)",
+                        "std":""
+                    },
+                    {
+                        "name":"happy_ends",
+                        "type":"varchar(512)",
+                        "std":""
+                    },
+                    {
+                        "name":"tags",
+                        "type":"varchar(512)",
+                        "std":""
+                    },
+                    {
+                        "name":"likes",
+                        "type":"int",
+                        "std":"default 0"
+                    },
+                    {
+                        "name":"dislikes",
+                        "type":"int",
+                        "std":"default 0"
+                    },
+                    {
+                        "name":"views",
+                        "type":"varchar(512)",
+                        "std":"default 0"
+                    },
+                    {
+                        "name":"visibil",
+                        "type":"boolean",
+                        "std":"default 1"
+                    },
+                    {
+                        "name":"visibility",
+                        "type":"varchar(512)",
+                        "std":""
+                    },
+                    {
+                        "name":"public",
+                        "type":"boolean",
+                        "std":""
+                    },
+                    {
+                        "name":"free",
+                        "type":"boolean",
+                        "std":""
+                    },
+                    {
+                        "name":"trailer",
+                        "type":"boolean",
+                        "std":""
+                    },
+                    {
+                        "name":"type",
+                        "type":"varchar(32)",
+                        "std":""
+                    },
+                    {
+                        "name":"rules",
+                        "type":"varchar(256)",
+                        "std":""
+                    },
+                    {
+                        "name":"flags",
+                        "type":"varchar(64)",
+                        "std":""
+                    },
+                    {
+                        "name":"url",
+                        "type":"varchar(2048)",
+                        "std":""
+                    },
+                    {
+                        "name":"thumbnail_url",
+                        "type":"varchar(2048)",
+                        "std":""
+                    },
+                    {
+                        "name":"sponsored_url",
+                        "type":"varchar(2048)",
+                        "std":""
+                    },
+                    {
+                        "name":"owner_id",
+                        "type":"varchar(32)",
+                        "std":""
+                    },
+                    {
+                        "name":"timestamps",
+                        "type": "varchar(512)",
+                        "std": ""
+                    },
+                    {
+                        "name":"action_stamps",
+                        "type": "varchar(1024)",
+                        "std": ""
+                    },
+                    {
+                        "name":"created_at",
                         "type": "datetime",
                         "std": "not null"
                     },
                     {
-                        "name":"verified",
+                        "name":"updated_at",
                         "type": "datetime",
-                        "std": ""
+                        "std": "not null"
                     },
                     {
                         "name":"soft_delete",
@@ -136,8 +230,8 @@
     },
     "limits":{
         "request_limit":{
-            "guest":100,
-            "user":1000,
+            "guest":1000,
+            "user":10000,
             "moderator":"~~",
             "administrator":"~~"
         }
@@ -153,11 +247,11 @@
         "admin":{
             "username":"admin",
             "password":"verysecret",
-            "email":"info@njoyporn.de"
+            "email":"info@your-host.com"
         }
     },
     "data":{
-        "data":"/data"
+        "path":"data"
     },
     "debug":false
 }
